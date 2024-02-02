@@ -17,6 +17,7 @@ import OnBoarding from '../../screens/OnBoarding/OnBoarding';
 import Profile from '../../screens/Profile/Profile';
 import UserDetails from '../../screens/UserDetails/UserDetails';
 import {useUserState} from '../../store/userState';
+import {HomeStackScreen} from '../HomeStackScreen/HomeStackScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -110,7 +111,11 @@ export const MainTabScreen = () => {
         },
         tabBarActiveTintColor: Colors.brown,
       })}>
-      <Tab.Screen name="Home" component={HomeScreen} options={{headerShown: false}} />
+      <Tab.Screen
+        name="Home"
+        component={HomeStackScreen}
+        options={{headerShown: false}}
+      />
       <Tab.Screen
         name="Favourites"
         component={Favourites}

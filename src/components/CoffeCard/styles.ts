@@ -23,9 +23,11 @@ const styles = StyleSheet.create({
   desc: {
     fontSize: 7,
     marginTop: 2,
+    maxWidth: 100,
   },
   title: {
     fontSize: 18,
+    maxWidth: 100,
   },
   price: {
     fontSize: 18,

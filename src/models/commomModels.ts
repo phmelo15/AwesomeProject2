@@ -1,3 +1,5 @@
+import {ICoffeInfo} from './coffeModels';
+
 export interface IUserCredentials {
   username: string;
   password: string;
@@ -10,10 +12,10 @@ export interface ICoffeButton {
 }
 
 export interface ICoffeCard {
-  data: {
-    type: string;
-    desc: string;
-    price: string;
-    image: string;
-  };
+  data: ICoffeInfo;
+  onpress: () => void;
+}
+
+export interface IBackButton {
+  onpress: () => void;
 }
