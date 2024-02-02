@@ -9,7 +9,11 @@ import {ICoffeCard} from '../../models/commomModels';
 const CoffeCard = ({data}: ICoffeCard) => {
   return (
     <TouchableOpacity style={styles.container}>
-      <Image source={images[data.image]} style={{alignSelf: 'center'}} testID="Image" />
+      <Image
+        source={images[data.image]}
+        style={{alignSelf: 'center', borderRadius: 14}}
+        testID="Image"
+      />
       <Text style={styles.title}>{data.type}</Text>
       <Text style={styles.desc}>{data.desc}</Text>
       <View style={styles.containerPayment} testID="payment">

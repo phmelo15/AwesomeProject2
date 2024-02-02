@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'lightgray',
     height: 50,
-    marginTop: 35,
+    marginTop: 20,
     borderRadius: 50,
     flexDirection: 'row',
     alignItems: 'center',

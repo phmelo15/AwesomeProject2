@@ -7,6 +7,7 @@ import UserService from '../../../services/UserService/UserService';
 import {useUserState} from '../../../store/userState';
 import {getMomentDay} from '../../../utils/getMomentDay';
 import styles from './styles';
+import HomeInput from '../../../components/HomeInput/HomeInput';
 
 const HomeScreen = () => {
   const [coffeType, setCoffeType] = useState<string>('Cappuccino');
@@ -51,6 +52,7 @@ const HomeScreen = () => {
         {greeting}, {user?.profile?.firstname}
       </Text>
       <Text style={styles.subTitle}>Categorias</Text>
+      <HomeInput />
 
       <CoffeNavBar returnCoffeType={type => setCoffeType(type)} />
       {coffeType === 'Cappuccino' ? (

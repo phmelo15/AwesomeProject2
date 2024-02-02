@@ -14,6 +14,8 @@ const images: ImagesType = {
   iconCappuccino2: require('../assets/Icons/Cappuccino2.png'),
   cappuccinoPhoto: require('../assets/cappuccino1.png'),
   coffeMilk: require('../assets/coffeMilk.png'),
+  iceTea: require('../assets/iceTea.jpg'),
+  espresso: require('../assets/espresso.jpg'),
 };
 
 export default images;
