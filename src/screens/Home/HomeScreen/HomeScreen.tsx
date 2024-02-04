@@ -11,9 +11,11 @@ import {useUserState} from '../../../store/userState';
 import {getMomentDay} from '../../../utils/getMomentDay';
 import styles from './styles';
 import {useNavigation} from '@react-navigation/native';
+import {HomeRoutes} from '../../../navigation/HomeStackScreen/HomeStackScreen.routes';
+import {StackTypes} from '../../../navigation/StackNavigation/routes.types';
 
 const HomeScreen = () => {
-  const {navigate} = useNavigation();
+  const {navigate} = useNavigation<StackTypes>();
   const [coffeType, setCoffeType] = useState<string>('Cappuccino');
   const [greeting, setGreeting] = useState<string>('');
   const [coffeInfo, setCoffeInfo] = useState<ICoffeInfo[]>([]);
@@ -38,7 +40,7 @@ const HomeScreen = () => {
   };
 
   const handleNavigateToDetailsCard = () => {
-    navigate('CoffeDetails');
+    navigate(HomeRoutes.COFFEDETAILS);
   };
 
   const renderItem: ListRenderItem<ICoffeInfo> = ({

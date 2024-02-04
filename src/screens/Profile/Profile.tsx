@@ -1,18 +1,19 @@
-import {View, Text, TouchableOpacity} from 'react-native';
-import React, {useCallback, useEffect} from 'react';
-import styles from './styles';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {useUserState} from '../../store/userState';
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
-import UserService from '../../services/UserService/UserService';
+import React, {useCallback} from 'react';
+import {Text, TouchableOpacity, View} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import {ProfileRoutes} from '../../navigation/ProfileStackScreen/ProfileStackScreen.routes';
 import {StackTypes} from '../../navigation/StackNavigation/routes.types';
+import UserService from '../../services/UserService/UserService';
+import {useUserState} from '../../store/userState';
+import styles from './styles';
 
 const Profile = () => {
-  const navigation = useNavigation<StackTypes>();
+  const {navigate} = useNavigation<StackTypes>();
   const {setToken, user, setUser} = useUserState();
 
   const navigateUserDetails = () => {
-    navigation.navigate('UserDetailsScreen');
+    navigate(ProfileRoutes.USERDETAILSSCREEN);
   };
 
   const getUser = async (id: string) => {

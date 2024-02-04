@@ -1,12 +1,8 @@
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {HomeParams} from '../HomeStackScreen/HomeStackScreen.routes';
+import {ProfileParams} from '../ProfileStackScreen/ProfileStackScreen.routes';
+import {PublicParams} from '../PublicStackScreen/PublicStackScreen.routes';
 
-type StackNavigation = {
-  OnBoarding: undefined;
-  HomeScreen: undefined;
-  Register: undefined;
-  Login: undefined;
-  UserDetailsScreen: undefined;
-  Profile: undefined;
-};
+export type RootStackNavigationParam = HomeParams & ProfileParams & PublicParams;
 
-export type StackTypes = NativeStackNavigationProp<StackNavigation>;
+export type StackTypes = NativeStackNavigationProp<RootStackNavigationParam>;
