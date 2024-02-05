@@ -9,3 +9,7 @@ export interface ICoffeInfo {
   available: boolean;
   type: string;
 }
+
+export interface IBottomSheetCard {
+  width?: string;
+}

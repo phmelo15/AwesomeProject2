@@ -29,20 +29,20 @@ export const MainTabScreen = () => {
           let rn = route.name;
 
           if (rn === homeScreen) {
-            iconColor = focused ? Colors.brown : Colors.lightGray;
+            iconColor = focused ? Colors.brown.lightBrown : Colors.lightGray;
             return <Entypo name={'home'} size={22} color={iconColor} />;
           } else if (rn === favouritesScreen) {
-            iconColor = focused ? Colors.brown : Colors.lightGray;
+            iconColor = focused ? Colors.brown.lightBrown : Colors.lightGray;
             return <AntDesign name={'heart'} size={20} color={iconColor} />;
           } else if (rn === cartScreen) {
-            iconColor = focused ? Colors.brown : Colors.lightGray;
+            iconColor = focused ? Colors.brown.lightBrown : Colors.lightGray;
             return <FontAwesome5 name={'cart-plus'} size={20} color={iconColor} />;
           } else if (rn === profileScreen) {
-            iconColor = focused ? Colors.brown : Colors.lightGray;
+            iconColor = focused ? Colors.brown.lightBrown : Colors.lightGray;
             return <FontAwesome name={'user-circle-o'} size={20} color={iconColor} />;
           }
         },
-        tabBarActiveTintColor: Colors.brown,
+        tabBarActiveTintColor: Colors.brown.lightBrown,
       })}>
       <Tab.Screen
         name="Home"

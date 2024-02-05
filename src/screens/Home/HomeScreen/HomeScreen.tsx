@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {FlatList, ListRenderItem, Text, View} from 'react-native';
+import {Button, FlatList, ListRenderItem, ScrollView, Text, View} from 'react-native';
 import CoffeCard from '../../../components/CoffeCard/CoffeCard';
 import CoffeNavBar from '../../../components/CoffeNavBar/CoffeNavBar';
 import Header from '../../../components/Header/Header';
@@ -39,8 +39,8 @@ const HomeScreen = () => {
     }
   };
 
-  const handleNavigateToDetailsCard = () => {
-    navigate(HomeRoutes.COFFEDETAILS);
+  const handleNavigateToDetailsCard = (data: ICoffeInfo) => {
+    navigate(HomeRoutes.COFFEDETAILS, {data: data});
   };
 
   const renderItem: ListRenderItem<ICoffeInfo> = ({
@@ -51,7 +51,7 @@ const HomeScreen = () => {
     index: number;
   }) => {
     if (coffeType === item?.type) {
-      return <CoffeCard data={item} onpress={handleNavigateToDetailsCard} />;
+      return <CoffeCard data={item} onpress={() => handleNavigateToDetailsCard(item)} />;
     } else {
       return <></>;
     }
@@ -67,17 +67,15 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <Header location="Vitoria, Brasil" />
       <Text style={styles.title}>
         {greeting}
         {user?.profile?.firstname && `, ${user?.profile?.firstname}`}
       </Text>
-      <Text style={styles.subTitle}>Categorias</Text>
+      <Text style={styles.subTitle}>Categories</Text>
       <HomeInput />
-
       <CoffeNavBar returnCoffeType={type => setCoffeType(type)} />
-
       <FlatList
         data={coffeInfo}
         renderItem={renderItem}
@@ -85,7 +83,14 @@ const HomeScreen = () => {
         showsHorizontalScrollIndicator={false}
         horizontal
       />
-    </View>
+      <Text style={styles.specialOffer}>Special Offer 🔥</Text>
+      <View style={{marginBottom: 60}}>
+        <CoffeCard
+          data={coffeInfo[1]}
+          onpress={() => handleNavigateToDetailsCard(coffeInfo[0])}
+        />
+      </View>
+    </ScrollView>
   );
 };
 

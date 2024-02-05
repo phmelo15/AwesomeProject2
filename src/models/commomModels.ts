@@ -9,6 +9,7 @@ export interface ICoffeButton {
   onPress?: () => void;
   title: string;
   width?: string;
+  price?: number;
 }
 
 export interface ICoffeCard {
@@ -17,5 +18,5 @@ export interface ICoffeCard {
 }
 
 export interface IBackButton {
-  onpress: () => void;
+  onpress?: () => void;
 }

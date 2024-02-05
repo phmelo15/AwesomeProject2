@@ -1,15 +1,21 @@
-import {View, Text, TouchableOpacity} from 'react-native';
 import React from 'react';
-import styles from './styles';
-import {useNavigation} from '@react-navigation/native';
-import {StackTypes} from '../../navigation/StackNavigation/routes.types';
+import {Text, TouchableOpacity, View} from 'react-native';
 import {ICoffeButton} from '../../models/commomModels';
+import styles from './styles';
 
-const CoffeButton = ({onPress, title, width}: ICoffeButton) => {
+const CoffeButton = ({onPress, title, width, price}: ICoffeButton) => {
   return (
-    <TouchableOpacity style={{...styles.button, width: width}} onPress={onPress}>
+    <TouchableOpacity
+      style={
+        price ? {...styles.buttonPrice, width: width} : {...styles.button, width: width}
+      }
+      onPress={onPress}>
       <Text style={styles.buttonText}>{title}</Text>
-      <View testID="15"></View>
+      {price && (
+        <View testID="15" style={styles.containerPrice}>
+          <Text style={styles.price}>R$ {price}</Text>
+        </View>
+      )}
     </TouchableOpacity>
   );
 };

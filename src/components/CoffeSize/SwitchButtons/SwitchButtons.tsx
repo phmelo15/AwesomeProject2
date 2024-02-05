@@ -11,20 +11,20 @@ interface ICoffeButton {
   typeCoffe?: string;
 }
 
-const CoffeButtonNav = ({title, icon, isActive, onpress, typeCoffe}: ICoffeButton) => {
+const SwitchButtons = ({title, icon, isActive, onpress, typeCoffe}: ICoffeButton) => {
   return typeCoffe === title ? (
     <TouchableOpacity
-      style={{...styles.container, backgroundColor: Colors.brown.lightBrown}}
+      style={{...styles.container, backgroundColor: Colors.brown.darkBrown}}
       onPress={onpress}>
-      {icon}
       <Text style={{...styles.text, color: Colors.white}}>{title}</Text>
     </TouchableOpacity>
   ) : (
-    <TouchableOpacity style={styles.container} onPress={onpress}>
-      {icon}
+    <TouchableOpacity
+      style={{...styles.container, backgroundColor: Colors.white}}
+      onPress={onpress}>
       <Text style={{...styles.text, color: Colors.black}}>{title}</Text>
     </TouchableOpacity>
   );
 };
 
-export default CoffeButtonNav;
+export default SwitchButtons;

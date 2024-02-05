@@ -3,7 +3,6 @@ import {Colors} from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   container: {
-    width: '90%',
     height: 60,
     backgroundColor: Colors.translucid,
     alignSelf: 'center',

@@ -24,7 +24,12 @@ const CoffeCard = ({data, onpress}: ICoffeCard) => {
       </Text>
       <View style={styles.containerPayment} testID="payment">
         <Text style={styles.price}>{`R$ ${data.price}`}</Text>
-        <FontAwesome6 name="circle-plus" size={26} color={Colors.brown} testID="icon" />
+        <FontAwesome6
+          name="circle-plus"
+          size={26}
+          color={Colors.brown.lightBrown}
+          testID="icon"
+        />
       </View>
     </TouchableOpacity>
   );
