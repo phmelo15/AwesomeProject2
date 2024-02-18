@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     paddingVertical: 40,
     justifyContent: 'space-between',
     flex: 1,
+    backgroundColor: Colors.white,
   },
   title: {
     fontSize: 26,

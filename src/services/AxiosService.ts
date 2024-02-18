@@ -9,7 +9,7 @@ interface UserData {
 
 const createAxiosInstance = async () => {
   let config: AxiosRequestConfig = {
-    baseURL: 'http://192.168.0.5:3000',
+    baseURL: 'http://127.0.0.1:3000',
     timeout: 10000,
   };
 

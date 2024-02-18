@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     backgroundColor: 'white',
     flex: 1,
+    // marginBottom: 50,
   },
   title: {
     fontSize: 24,

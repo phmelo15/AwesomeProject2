@@ -8,6 +8,7 @@ export interface ICoffeInfo {
   image: string;
   available: boolean;
   type: string;
+  isFavorite: boolean;
 }
 
 export interface IBottomSheetCard {

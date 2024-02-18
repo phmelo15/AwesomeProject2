@@ -1,24 +1,26 @@
+import {useNavigation} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Button, FlatList, ListRenderItem, ScrollView, Text, View} from 'react-native';
+import {FlatList, ListRenderItem, ScrollView, Text} from 'react-native';
 import CoffeCard from '../../../components/CoffeCard/CoffeCard';
 import CoffeNavBar from '../../../components/CoffeNavBar/CoffeNavBar';
 import Header from '../../../components/Header/Header';
 import HomeInput from '../../../components/HomeInput/HomeInput';
 import {ICoffeInfo} from '../../../models/coffeModels';
+import {HomeRoutes} from '../../../navigation/HomeStackScreen/HomeStackScreen.routes';
+import {StackTypes} from '../../../navigation/StackNavigation/routes.types';
 import CoffeService from '../../../services/CoffeService/CoffeService';
+import FavoritesService from '../../../services/FavoritesService/FavoritesService';
 import UserService from '../../../services/UserService/UserService';
 import {useUserState} from '../../../store/userState';
 import {getMomentDay} from '../../../utils/getMomentDay';
 import styles from './styles';
-import {useNavigation} from '@react-navigation/native';
-import {HomeRoutes} from '../../../navigation/HomeStackScreen/HomeStackScreen.routes';
-import {StackTypes} from '../../../navigation/StackNavigation/routes.types';
 
 const HomeScreen = () => {
   const {navigate} = useNavigation<StackTypes>();
   const [coffeType, setCoffeType] = useState<string>('Cappuccino');
   const [greeting, setGreeting] = useState<string>('');
   const [coffeInfo, setCoffeInfo] = useState<ICoffeInfo[]>([]);
+  const [favoriteList, setFavoriteList] = useState<number[]>([]);
   const {user, setUser} = useUserState();
 
   const getAllCafes = async () => {
@@ -39,6 +41,22 @@ const HomeScreen = () => {
     }
   };
 
+  const deleteFavorite = async (id: any) => {
+    try {
+      const response = await FavoritesService.deleteFavorite(id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const createFavorite = async (id: any) => {
+    try {
+      const response = await FavoritesService.postFavorite(id);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleNavigateToDetailsCard = (data: ICoffeInfo) => {
     navigate(HomeRoutes.COFFEDETAILS, {data: data});
   };
@@ -51,14 +69,39 @@ const HomeScreen = () => {
     index: number;
   }) => {
     if (coffeType === item?.type) {
-      return <CoffeCard data={item} onpress={() => handleNavigateToDetailsCard(item)} />;
+      return (
+        <CoffeCard
+          data={item}
+          onpress={() => handleNavigateToDetailsCard(item)}
+          isFavorite={favoriteList.includes(item.id)}
+          updateCoffe={() => {
+            favoriteList.includes(item.id)
+              ? deleteFavorite(item.id)
+              : createFavorite(item.id);
+            getAllCafes();
+          }}
+        />
+      );
     } else {
       return <></>;
     }
   };
 
+  const getFavorites = async () => {
+    try {
+      const response = await FavoritesService.getFavorites();
+      const justCoffeId = response.map((item: any) => {
+        return item.coffeId.toString();
+      });
+      setFavoriteList(justCoffeId);
+      getAllCafes();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    getAllCafes();
+    getFavorites();
   }, []);
 
   useEffect(() => {
@@ -83,13 +126,6 @@ const HomeScreen = () => {
         showsHorizontalScrollIndicator={false}
         horizontal
       />
-      <Text style={styles.specialOffer}>Special Offer 🔥</Text>
-      <View style={{marginBottom: 60}}>
-        <CoffeCard
-          data={coffeInfo[1]}
-          onpress={() => handleNavigateToDetailsCard(coffeInfo[0])}
-        />
-      </View>
     </ScrollView>
   );
 };

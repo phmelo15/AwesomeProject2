@@ -6,10 +6,10 @@ import images, {ImagesType} from '../../constants/images';
 import {ICoffeCard} from '../../models/commomModels';
 import styles from './styles';
 
-const CoffeCard = ({data, onpress, isFavorite, updateCoffe}: ICoffeCard) => {
-  const imageKey = data?.image as keyof ImagesType;
+const FavouritesCard = ({data, onpress}: ICoffeCard) => {
+  const imageKey = data.image as keyof ImagesType;
 
-  const [favoriteSent, setFavoriteSent] = useState<boolean>(isFavorite);
+  const [favoriteSent, setFavoriteSent] = useState<boolean>(false);
 
   return (
     <TouchableOpacity style={styles.container} onPress={onpress}>
@@ -19,18 +19,14 @@ const CoffeCard = ({data, onpress, isFavorite, updateCoffe}: ICoffeCard) => {
         testID="Image"
       />
       <Text style={styles.title} numberOfLines={1}>
-        {data?.name}
+        {data.name}
       </Text>
       <Text style={styles.desc} numberOfLines={1}>
-        {data?.description}
+        {data.description}
       </Text>
       <View style={styles.containerPayment} testID="payment">
-        <Text style={styles.price}>{`R$ ${data?.price}`}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            updateCoffe();
-            setFavoriteSent(!favoriteSent);
-          }}>
+        <Text style={styles.price}>{`R$ ${data.price}`}</Text>
+        <TouchableOpacity onPress={() => setFavoriteSent(true)}>
           {favoriteSent ? (
             <FontAwesome6
               name="circle-check"
@@ -52,4 +48,4 @@ const CoffeCard = ({data, onpress, isFavorite, updateCoffe}: ICoffeCard) => {
   );
 };
 
-export default CoffeCard;
+export default FavouritesCard;

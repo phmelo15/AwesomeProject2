@@ -15,6 +15,8 @@ export interface ICoffeButton {
 export interface ICoffeCard {
   data: ICoffeInfo;
   onpress: () => void;
+  isFavorite: boolean;
+  updateCoffe: () => void;
 }
 
 export interface IBackButton {

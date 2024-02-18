@@ -5,10 +5,11 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 20,
     paddingHorizontal: 5,
-    width: 150,
+    width: '80%',
     height: 180,
     backgroundColor: Colors.white,
     paddingVertical: 5,
+    alignSelf: 'center',
     borderRadius: 8,
     shadowColor: '#000',
     shadowOffset: {
@@ -18,13 +19,13 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 2.5,
     elevation: 2,
-    marginRight: 20,
+
     marginVertical: 10,
   },
   desc: {
     fontSize: 7,
     marginTop: 2,
-    maxWidth: 100,
+    maxWidth: 200,
   },
   title: {
     fontSize: 18,
