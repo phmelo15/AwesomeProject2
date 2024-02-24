@@ -6,7 +6,7 @@ export interface IUserCredentials {
 }
 
 export interface ICoffeButton {
-  onPress?: () => void;
+  onPress: () => void;
   title: string;
   width?: string;
   price?: number;

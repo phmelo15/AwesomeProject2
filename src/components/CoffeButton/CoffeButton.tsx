@@ -1,22 +1,17 @@
 import React from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
 import {ICoffeButton} from '../../models/commomModels';
-import styles from './styles';
+import {ButtonText, Container, ContainerPrice, Price} from './styles';
 
 const CoffeButton = ({onPress, title, width, price}: ICoffeButton) => {
   return (
-    <TouchableOpacity
-      style={
-        price ? {...styles.buttonPrice, width: width} : {...styles.button, width: width}
-      }
-      onPress={onPress}>
-      <Text style={styles.buttonText}>{title}</Text>
+    <Container price={price} width="100%" onPress={onPress}>
+      <ButtonText>{title}</ButtonText>
       {price && (
-        <View testID="15" style={styles.containerPrice}>
-          <Text style={styles.price}>R$ {price}</Text>
-        </View>
+        <ContainerPrice testID="15">
+          <Price>R$ {price}</Price>
+        </ContainerPrice>
       )}
-    </TouchableOpacity>
+    </Container>
   );
 };
 

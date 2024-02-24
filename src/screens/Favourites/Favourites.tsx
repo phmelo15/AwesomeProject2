@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {FlatList, ListRenderItem, View} from 'react-native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {FlatList, ListRenderItem, RefreshControl} from 'react-native';
 import CoffeCard from '../../components/CoffeCard/CoffeCard';
 import {ICoffeInfo} from '../../models/coffeModels';
 import {HomeRoutes} from '../../navigation/HomeStackScreen/HomeStackScreen.routes';
@@ -8,25 +8,28 @@ import {StackTypes} from '../../navigation/StackNavigation/routes.types';
 import CoffeService from '../../services/CoffeService/CoffeService';
 import FavoritesService from '../../services/FavoritesService/FavoritesService';
 import {useUserState} from '../../store/userState';
-import styles, {Container} from './styles';
+import {Container, ActivityIndicator} from './styles';
+import {Colors} from '../../constants/Colors';
 
 const Favourites = () => {
-  const [favouritesList, setFavouritesList] = useState([]);
   const {navigate} = useNavigation<StackTypes>();
   const {user} = useUserState();
   const [coffeInfo, setCoffeInfo] = useState<ICoffeInfo[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getFavourites = async () => {
+    setLoading(true);
     try {
       const response = await FavoritesService.getFavorites(user.id);
       const responseCoffe = response.map((item: any) => {
         return item.coffeId;
       });
-      setFavouritesList(responseCoffe);
+
       getAllCafes(responseCoffe);
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
   const deleteFavorite = async (id: any) => {
@@ -72,18 +75,27 @@ const Favourites = () => {
     );
   };
 
-  useEffect(() => {
-    getFavourites();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      getFavourites();
+    }, []),
+  );
 
   return (
     <Container>
-      <FlatList
-        data={coffeInfo}
-        renderItem={renderItem}
-        numColumns={2}
-        keyExtractor={(item, index) => 'key' + index}
-      />
+      {loading ? (
+        <ActivityIndicator color={Colors.brown.lightBrown} size={22} />
+      ) : (
+        <FlatList
+          data={coffeInfo}
+          renderItem={renderItem}
+          numColumns={2}
+          keyExtractor={(item, index) => 'key' + index}
+          refreshControl={
+            <RefreshControl refreshing={loading} onRefresh={getFavourites} />
+          }
+        />
+      )}
     </Container>
   );
 };

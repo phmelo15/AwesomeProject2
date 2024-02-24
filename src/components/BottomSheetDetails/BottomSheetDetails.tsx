@@ -1,6 +1,6 @@
-import {View, Text, Animated, Dimensions, PanResponder} from 'react-native';
+import {View, Text, Animated, Dimensions, PanResponder, Button} from 'react-native';
 import React, {useRef} from 'react';
-import styles from './styles';
+import styles, {ButtonContainer, Description, DragHandle, TitleAbout} from './styles';
 import BottomSheetCard from '../BottomSheetCard/BottomSheetCard';
 import CoffeButton from '../CoffeButton/CoffeButton';
 import CoffeSize from '../CoffeSize/CoffeSize';
@@ -71,14 +71,17 @@ const BottomSheetDetails = ({data}: ICoffeDetails) => {
     <Animated.View
       style={[styles.container, bottomSheetAnimation]}
       {...panResponder.panHandlers}>
-      <View style={styles.dragHandle} />
+      <DragHandle />
       <BottomSheetCard width="100%" />
       <CoffeSize returnCoffeType={val => null} />
-      <Text style={styles.titleAbout}>About</Text>
-      <Text style={styles.description}>{data.description}</Text>
-      <View style={styles.buttonContainer}>
-        <CoffeButton title="Add to cart" width="100%" price={data?.price} />
-      </View>
+      <TitleAbout>About</TitleAbout>
+      <Description>{data.description}</Description>
+      <CoffeButton
+        title="Add to cart"
+        width="100%"
+        price={data?.price}
+        onPress={() => console.log('algoooo')}
+      />
     </Animated.View>
   );
 };

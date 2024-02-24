@@ -1,6 +1,6 @@
-import {useNavigation} from '@react-navigation/native';
-import React, {useEffect, useState} from 'react';
-import {FlatList, ListRenderItem, ScrollView, Text} from 'react-native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import React, {useCallback, useEffect, useState} from 'react';
+import {ActivityIndicator, FlatList, ListRenderItem, RefreshControl} from 'react-native';
 import CoffeCard from '../../../components/CoffeCard/CoffeCard';
 import CoffeNavBar from '../../../components/CoffeNavBar/CoffeNavBar';
 import Header from '../../../components/Header/Header';
@@ -14,6 +14,7 @@ import UserService from '../../../services/UserService/UserService';
 import {useUserState} from '../../../store/userState';
 import {getMomentDay} from '../../../utils/getMomentDay';
 import {Container, Subtitle, Title} from './styles';
+import {Colors} from '../../../constants/Colors';
 
 const HomeScreen = () => {
   const {navigate} = useNavigation<StackTypes>();
@@ -22,6 +23,7 @@ const HomeScreen = () => {
   const [coffeInfo, setCoffeInfo] = useState<ICoffeInfo[]>([]);
   const [favoriteList, setFavoriteList] = useState<number[]>([]);
   const {user, setUser} = useUserState();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const getAllCafes = async () => {
     try {
@@ -44,6 +46,7 @@ const HomeScreen = () => {
   const deleteFavorite = async (id: any) => {
     try {
       const response = await FavoritesService.deleteFavorite(id);
+      getFavorites();
     } catch (error) {
       console.error(error);
     }
@@ -52,6 +55,7 @@ const HomeScreen = () => {
   const createFavorite = async (id: any) => {
     try {
       const response = await FavoritesService.postFavorite(id);
+      getFavorites();
     } catch (error) {
       console.error(error);
     }
@@ -70,17 +74,22 @@ const HomeScreen = () => {
   }) => {
     if (coffeType === item?.type) {
       return (
-        <CoffeCard
-          data={item}
-          onpress={() => handleNavigateToDetailsCard(item)}
-          isFavorite={favoriteList.includes(item.id)}
-          updateCoffe={() => {
-            favoriteList.includes(item.id)
-              ? deleteFavorite(item.id)
-              : createFavorite(item.id);
-            getAllCafes();
-          }}
-        />
+        <>
+          {loading ? (
+            <ActivityIndicator color={Colors.brown.lightBrown} size={22} />
+          ) : (
+            <CoffeCard
+              data={item}
+              onpress={() => handleNavigateToDetailsCard(item)}
+              isFavorite={favoriteList.includes(item.id)}
+              updateCoffe={() => {
+                favoriteList.includes(item.id)
+                  ? deleteFavorite(item.id)
+                  : createFavorite(item.id);
+              }}
+            />
+          )}
+        </>
       );
     } else {
       return <></>;
@@ -88,21 +97,29 @@ const HomeScreen = () => {
   };
 
   const getFavorites = async () => {
+    setLoading(true);
     try {
       const response = await FavoritesService.getFavorites();
       const justCoffeId = response.map((item: any) => {
         return item.coffeId.toString();
       });
-      setFavoriteList(justCoffeId);
       getAllCafes();
+      setFavoriteList(justCoffeId);
     } catch (error) {
       console.error(error);
     }
+    setLoading(false);
   };
 
-  useEffect(() => {
-    getFavorites();
-  }, []);
+  // useEffect(() => {
+
+  // }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      getFavorites();
+    }, []),
+  );
 
   useEffect(() => {
     getUser(user?.id);
@@ -124,7 +141,9 @@ const HomeScreen = () => {
         renderItem={renderItem}
         keyExtractor={(item, index) => 'key' + index}
         showsHorizontalScrollIndicator={false}
+        showsVerticalScrollIndicator={false}
         horizontal
+        refreshControl={<RefreshControl refreshing={loading} onRefresh={getFavorites} />}
       />
     </Container>
   );

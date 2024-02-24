@@ -1,5 +1,33 @@
 import {Dimensions, Platform, StyleSheet} from 'react-native';
 import {Colors} from '../../constants/Colors';
+import styled from 'styled-components/native';
+
+export const DragHandle = styled.View`
+  width: 40px;
+  height: 4px;
+  background-color: ${Colors.lightGray};
+  border-radius: 10px;
+  align-self: center;
+  margin-top: 10px;
+`;
+
+export const TitleAbout = styled.Text`
+  font-size: 20px;
+  color: ${Colors.black};
+  margin-vertical: 10px;
+  margin-top: 30px;
+  font-weight: 300;
+`;
+
+export const ButtonContainer = styled.View`
+  margin-top: 100px;
+`;
+
+export const Description = styled.Text`
+  font-size: 11px;
+  color: ${Colors.black};
+  font-weight: 300;
+`;
 
 const styles = StyleSheet.create({
   container: {
