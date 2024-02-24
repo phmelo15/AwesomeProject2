@@ -1,26 +1,25 @@
-import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
+import {Colors} from '../../constants/Colors';
 
-const styles = StyleSheet.create({
-  input: {
-    borderRadius: 50,
-    height: 50,
-    flexGrow: 1,
-    marginLeft: 10,
-  },
-  containerInput: {
-    backgroundColor: '#F8F7FA',
-    borderWidth: 1,
-    borderColor: 'lightgray',
-    height: 50,
-    marginTop: 20,
-    borderRadius: 50,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 15,
-  },
-  iconFilter: {
-    marginRight: 5,
-  },
-});
+export const Input = styled.TextInput`
+  border-radius: 50px;
+  height: 50px;
+  flex-grow: 1;
+  margin-left: 10px;
+`;
 
-export default styles;
+export const ContainerInput = styled.View`
+  background-color: ${Colors.white};
+  border-width: 1px;
+  border-color: ${Colors.lightGray};
+  height: 50px;
+  margin-top: 20px;
+  border-radius: 50px;
+  flex-direction: row;
+  align-items: center;
+  padding-horizontal: 15px;
+`;
+
+export const IconFilter = styled.Image`
+  margin-right: 5px;
+`;

@@ -1,5 +1,14 @@
 import {StyleSheet} from 'react-native';
 import {Colors} from '../../constants/Colors';
+import styled from 'styled-components/native';
+
+export const Input = styled.TextInput`
+  background-color: ${Colors.white};
+  border-radius: 8px;
+  padding-left: 20px;
+  margin-top: 15px;
+  height: 50px;
+`;
 
 const styles = StyleSheet.create({
   container: {},

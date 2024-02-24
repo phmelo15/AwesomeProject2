@@ -1,46 +1,44 @@
-import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
 import {Colors} from '../../constants/Colors';
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 20,
-    paddingHorizontal: 5,
-    width: 150,
-    height: 180,
-    backgroundColor: Colors.white,
-    paddingVertical: 5,
-    borderRadius: 8,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 2.5,
-    elevation: 2,
-    marginRight: 20,
-    marginVertical: 10,
-  },
-  desc: {
-    fontSize: 7,
-    marginTop: 2,
-    maxWidth: 100,
-  },
-  title: {
-    fontSize: 18,
-    maxWidth: 100,
-  },
-  price: {
-    fontSize: 18,
-    marginTop: 5,
-    fontWeight: '500',
-  },
-  containerPayment: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    width: '100%',
-  },
-});
+export const Container = styled.TouchableOpacity`
+  margin-top: 20px;
+  padding-horizontal: 5px;
+  width: 150px;
+  height: 180px;
+  background-color: ${Colors.white};
+  padding-vertical: 5px;
+  border-radius: 8px;
+  box-shadow: 1px 1px 1.5px ${Colors.lightGray};
+  elevation: 5;
+  margin-right: 20px;
+  margin-vertical: 10px;
+`;
 
-export default styles;
+export const Description = styled.Text`
+  font-size: 7px;
+  margin-top: 2px;
+  max-width: 100px;
+`;
+
+export const Title = styled.Text`
+  font-size: 18px;
+  max-width: 100px;
+`;
+export const PriceText = styled.Text`
+  font-size: 18px;
+  margin-top: 5px;
+  font-weight: 500;
+`;
+
+export const PaymentContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+export const CoffeImage = styled.Image`
+  align-self: center;
+  border-radius: 14px;
+`;

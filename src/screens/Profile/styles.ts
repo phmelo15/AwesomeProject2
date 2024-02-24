@@ -1,28 +1,30 @@
-import {StyleSheet} from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import styled from 'styled-components/native';
+import {Colors} from '../../constants/Colors';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: 'white',
-    paddingHorizontal: 20,
-    paddingVertical: 40,
-  },
-  title: {
-    fontSize: 22,
-    color: 'black',
-    fontWeight: '500',
-  },
-  photo: {
-    marginTop: 60,
-    alignSelf: 'center',
-  },
-  containerOptions: {
-    marginTop: 50,
-  },
-  textOptions: {
-    fontSize: 16,
-    color: 'gray',
-  },
-});
+export const Container = styled.View`
+  flex: 1;
+  background-color: ${Colors.white};
+  padding-horizontal: 20px;
+  padding-vertical: 40px;
+`;
 
-export default styles;
+export const Title = styled.Text`
+  font-size: 22px;
+  color: ${Colors.black};
+  font-weight: 500;
+`;
+
+export const Photo = styled(FontAwesome)`
+  margin-top: 60px;
+  align-self: center;
+`;
+
+export const ContainerOptions = styled.View`
+  margin-top: 50px;
+`;
+
+export const TextOptions = styled.Text`
+  font-size: 16px;
+  color: ${Colors.gray};
+`;

@@ -1,30 +1,23 @@
-import {StyleSheet} from 'react-native';
+import {styled} from 'styled-components/native';
 import {Colors} from '../../../constants/Colors';
 
-const styles = StyleSheet.create({
-  container: {
-    paddingVertical: 45,
-    paddingHorizontal: 30,
-    backgroundColor: 'white',
-    flex: 1,
-    // marginBottom: 50,
-  },
-  title: {
-    fontSize: 24,
-    color: 'black',
-    fontWeight: '500',
-    marginTop: 15,
-  },
-  subTitle: {
-    fontSize: 22,
-    color: 'black',
-    fontWeight: '500',
-    marginTop: 25,
-  },
-  specialOffer: {
-    fontSize: 24,
-    color: Colors.black,
-    marginTop: 20,
-  },
-});
-export default styles;
+export const Container = styled.ScrollView`
+  padding-vertical: 45px;
+  padding-horizontal: 30px;
+  background-color: ${Colors.white};
+  flex: 1;
+`;
+
+export const Title = styled.Text`
+  font-size: 24px;
+  color: ${Colors.black};
+  font-weight: 500;
+  margin-top: 15px;
+`;
+
+export const Subtitle = styled.Text`
+  font-size: 22px;
+  color: ${Colors.black};
+  font-weight: 500;
+  margin-top: 25px;
+`;

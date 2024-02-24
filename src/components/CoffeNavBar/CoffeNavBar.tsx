@@ -1,6 +1,6 @@
 import {View, Text, Image} from 'react-native';
 import React, {useState} from 'react';
-import styles from './styles';
+import {Container} from './styles';
 import CoffeButton from './CoffeButtonNav/CoffeButtonNav';
 import images from '../../constants/images';
 import {Colors} from '../../constants/Colors';
@@ -21,7 +21,7 @@ const CoffeNavBar = ({returnCoffeType}: ICoffeNavBar) => {
   };
 
   return (
-    <View style={styles.container} testID="container">
+    <Container>
       <CoffeButton
         title="Cappuccino"
         icon={
@@ -61,7 +61,7 @@ const CoffeNavBar = ({returnCoffeType}: ICoffeNavBar) => {
           />
         }
       />
-    </View>
+    </Container>
   );
 };
 

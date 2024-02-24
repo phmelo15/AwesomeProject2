@@ -8,7 +8,7 @@ import {StackTypes} from '../../navigation/StackNavigation/routes.types';
 import CoffeService from '../../services/CoffeService/CoffeService';
 import FavoritesService from '../../services/FavoritesService/FavoritesService';
 import {useUserState} from '../../store/userState';
-import styles from './styles';
+import styles, {Container} from './styles';
 
 const Favourites = () => {
   const [favouritesList, setFavouritesList] = useState([]);
@@ -77,14 +77,14 @@ const Favourites = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <Container>
       <FlatList
         data={coffeInfo}
         renderItem={renderItem}
         numColumns={2}
         keyExtractor={(item, index) => 'key' + index}
       />
-    </View>
+    </Container>
   );
 };
 

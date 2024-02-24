@@ -13,7 +13,7 @@ import FavoritesService from '../../../services/FavoritesService/FavoritesServic
 import UserService from '../../../services/UserService/UserService';
 import {useUserState} from '../../../store/userState';
 import {getMomentDay} from '../../../utils/getMomentDay';
-import styles from './styles';
+import {Container, Subtitle, Title} from './styles';
 
 const HomeScreen = () => {
   const {navigate} = useNavigation<StackTypes>();
@@ -110,13 +110,13 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
+    <Container>
       <Header location="Vitoria, Brasil" />
-      <Text style={styles.title}>
+      <Title>
         {greeting}
         {user?.profile?.firstname && `, ${user?.profile?.firstname}`}
-      </Text>
-      <Text style={styles.subTitle}>Categories</Text>
+      </Title>
+      <Subtitle>Categories</Subtitle>
       <HomeInput />
       <CoffeNavBar returnCoffeType={type => setCoffeType(type)} />
       <FlatList
@@ -126,7 +126,7 @@ const HomeScreen = () => {
         showsHorizontalScrollIndicator={false}
         horizontal
       />
-    </ScrollView>
+    </Container>
   );
 };
 

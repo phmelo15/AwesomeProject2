@@ -1,20 +1,19 @@
-import {StyleSheet} from 'react-native';
+import styled from 'styled-components/native';
+import {Colors} from '../../constants/Colors';
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  containerLocation: {
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-  },
-  textLocation: {
-    fontSize: 12,
-    color: 'black',
-    fontWeight: 'bold',
-  },
-});
+export const Container = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
 
-export default styles;
+export const ContainerLocation = styled.View`
+  flex-direction: row;
+  align-items: flex-end;
+`;
+
+export const TextLocation = styled.Text`
+  font-size: 12px;
+  color: ${Colors.black};
+  font-weight: bold;
+`;

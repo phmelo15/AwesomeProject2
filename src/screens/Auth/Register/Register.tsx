@@ -1,14 +1,13 @@
-import {View, Text, TextInput, Button, Alert} from 'react-native';
-import React, {useState} from 'react';
-import AuthService from '../../../services/AuthService/AuthService';
-import axios, {Axios} from 'axios';
-import CoffeButton from '../../../components/CoffeButton/CoffeButton';
-import styles from './styles';
-import {Colors} from '../../../constants/Colors';
-import Header from '../../../components/Header/Header';
-import HeaderBack from '../../../components/HeaderBack/HeaderBack';
 import {useNavigation} from '@react-navigation/native';
+import React, {useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {Alert, View} from 'react-native';
+import CoffeButton from '../../../components/CoffeButton/CoffeButton';
+import CoffeInput from '../../../components/CoffeInput/CoffeInput';
+import HeaderBack from '../../../components/HeaderBack/HeaderBack';
+import AuthService from '../../../services/AuthService/AuthService';
 import {useUserState} from '../../../store/userState';
+import {Container, Title} from './styles';
 
 interface IUserCredentials {
   username: string;
@@ -39,30 +38,28 @@ const Register = () => {
     }
   };
 
+  const {control, handleSubmit} = useForm<IUserCredentials>();
+
   return (
-    <View style={styles.container}>
+    <Container>
       <View>
         <HeaderBack onPress={goBack} />
-        <Text style={styles.title}>Digite suas credenciais, por favor</Text>
+        <Title>Digite suas credenciais, por favor</Title>
       </View>
-      <View style={styles.inputContainer}>
-        <TextInput
-          placeholder="Digite seu nickname..."
-          style={styles.input}
-          value={credentials.username}
-          placeholderTextColor={Colors.lightGray}
-          onChangeText={val => setCredentials({...credentials, username: val})}
+      <View>
+        <CoffeInput
+          control={control}
+          name="username"
+          placeholderText="Digite seu nickname..."
         />
-        <TextInput
-          placeholder="Digite sua senha..."
-          style={styles.input}
-          value={credentials.password}
-          placeholderTextColor={Colors.lightGray}
-          onChangeText={val => setCredentials({...credentials, password: val})}
+        <CoffeInput
+          control={control}
+          name="password"
+          placeholderText="Digite sua senha..."
         />
       </View>
-      <CoffeButton onPress={() => register()} title="Cadastrar" width="40%" />
-    </View>
+      <CoffeButton onPress={() => handleSubmit(register)} title="Cadastrar" width="40%" />
+    </Container>
   );
 };
 

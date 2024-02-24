@@ -1,14 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
-import React, {useState} from 'react';
+import React from 'react';
 import {useForm} from 'react-hook-form';
-import {Alert, Text, View} from 'react-native';
+import {Alert, View} from 'react-native';
 import CoffeButton from '../../../components/CoffeButton/CoffeButton';
 import CoffeInput from '../../../components/CoffeInput/CoffeInput';
 import HeaderBack from '../../../components/HeaderBack/HeaderBack';
 import {IUserCredentials} from '../../../models/commomModels';
 import AuthService from '../../../services/AuthService/AuthService';
 import {useUserState} from '../../../store/userState';
-import styles from './styles';
+import {Container, InputContainer, Title} from './styles';
 
 const Login = () => {
   const {goBack} = useNavigation();
@@ -29,12 +29,12 @@ const Login = () => {
   const {control, handleSubmit} = useForm<IUserCredentials>();
 
   return (
-    <View style={styles.container}>
+    <Container>
       <View>
         <HeaderBack onPress={goBack} />
-        <Text style={styles.title}>Digite suas credenciais, por favor</Text>
+        <Title>Digite suas credenciais, por favor</Title>
       </View>
-      <View style={styles.inputContainer}>
+      <InputContainer>
         <CoffeInput
           control={control}
           name="username"
@@ -45,9 +45,9 @@ const Login = () => {
           name="password"
           placeholderText="Digite sua senha..."
         />
-      </View>
+      </InputContainer>
       <CoffeButton onPress={handleSubmit(login)} title="Entrar" width="40%" />
-    </View>
+    </Container>
   );
 };
 

@@ -1,8 +1,7 @@
-import {View, Text, Image} from 'react-native';
 import React from 'react';
+import {Image} from 'react-native';
 import images from '../../constants/images';
-import styles from './styles';
-import Fontisto from 'react-native-vector-icons/Fontisto';
+import {Container, ContainerLocation, TextLocation} from './styles';
 
 interface IHeader {
   location?: string;
@@ -10,15 +9,14 @@ interface IHeader {
 
 const Header = ({location}: IHeader) => {
   return (
-    <View style={styles.container}>
+    <Container>
       <Image source={images.profile} />
-      <View style={styles.containerLocation}>
+      <ContainerLocation>
         <Image source={images.iconLocation} />
-        <Text style={styles.textLocation}>{location}</Text>
-      </View>
+        <TextLocation>{location}</TextLocation>
+      </ContainerLocation>
       <Image source={images.iconBell} />
-      {/* <Fontisto name="bell" size={22} color="black" /> */}
-    </View>
+    </Container>
   );
 };
 
