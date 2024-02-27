@@ -4,7 +4,7 @@ import {ButtonText, Container, ContainerPrice, Price} from './styles';
 
 const CoffeButton = ({onPress, title, width, price}: ICoffeButton) => {
   return (
-    <Container price={price} width="100%" onPress={onPress}>
+    <Container price={price} width={width} onPress={onPress}>
       <ButtonText>{title}</ButtonText>
       {price && (
         <ContainerPrice testID="15">

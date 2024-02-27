@@ -25,6 +25,10 @@ export const ContainerOptions = styled.View`
 `;
 
 export const TextOptions = styled.Text`
-  font-size: 16px;
+  font-size: 18px;
   color: ${Colors.gray};
+`;
+
+export const ButtonText = styled.TouchableOpacity`
+  padding-vertical: 10px;
 `;

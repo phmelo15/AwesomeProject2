@@ -37,4 +37,5 @@ export const Container = styled.TouchableOpacity<{
   border-radius: 50px;
   align-items: center;
   margin-top: 40px;
+  justify-content: center;
 `;

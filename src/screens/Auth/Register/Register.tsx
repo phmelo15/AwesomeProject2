@@ -17,7 +17,7 @@ interface IUserCredentials {
 const Register = () => {
   const {goBack} = useNavigation();
   const {setToken, setUser} = useUserState();
-
+  const [secureText, setSecureText] = useState<boolean>(true);
   const [credentials, setCredentials] = useState<IUserCredentials>({
     username: '',
     password: '',
@@ -56,6 +56,9 @@ const Register = () => {
           control={control}
           name="password"
           placeholderText="Digite sua senha..."
+          secureTextEntry
+          changeSecureText={() => setSecureText(!secureText)}
+          showEye={secureText}
         />
       </View>
       <CoffeButton onPress={() => handleSubmit(register)} title="Cadastrar" width="40%" />

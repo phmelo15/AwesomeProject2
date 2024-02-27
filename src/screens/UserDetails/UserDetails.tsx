@@ -78,6 +78,8 @@ const UserDetails = () => {
             control={control}
             name="dob"
             placeholderText="Data de nascimento..."
+            isMasked
+            mask="99/99/9999"
           />
         </View>
         <CoffeButton
