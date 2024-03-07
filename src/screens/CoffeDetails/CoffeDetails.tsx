@@ -9,14 +9,23 @@ import {
 } from '../../navigation/HomeStackScreen/HomeStackScreen.routes';
 import {Container, Image} from './styles';
 
+interface ISelectBackground {
+  Cappuccino: string;
+}
+
 const CoffeDetails = () => {
   const {params} = useRoute<HomeRouteParams<HomeRoutes.COFFEDETAILS>>();
+  const coffeData = params.data;
+  const selectBackground: ISelectBackground = {
+    Cappuccino: images.cappuccinoBackground,
+  };
 
   return (
     <Container>
-      <Image source={images.cappuccinoBackground} />
+      <Image source={selectBackground[coffeData.image]} />
       <BackButton />
-      <BottomSheetDetails data={params.data} />
+      <BottomSheetDetails data={coffeData} />
+      {/* <Button title="teste" onPress={() => console.log(coffeData.image)} /> */}
     </Container>
   );
 };

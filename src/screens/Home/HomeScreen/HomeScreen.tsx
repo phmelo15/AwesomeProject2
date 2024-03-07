@@ -45,7 +45,7 @@ const HomeScreen = () => {
 
   const deleteFavorite = async (id: any) => {
     try {
-      const response = await FavoritesService.deleteFavorite(id);
+      const response = await FavoritesService.deleteFavorite(id, parseInt(user?.id));
       getFavorites();
     } catch (error) {
       console.error(error);
@@ -54,7 +54,7 @@ const HomeScreen = () => {
 
   const createFavorite = async (id: any) => {
     try {
-      const response = await FavoritesService.postFavorite(id);
+      const response = await FavoritesService.postFavorite(id, parseInt(user?.id));
       getFavorites();
     } catch (error) {
       console.error(error);
@@ -65,13 +65,7 @@ const HomeScreen = () => {
     navigate(HomeRoutes.COFFEDETAILS, {data: data});
   };
 
-  const renderItem: ListRenderItem<ICoffeInfo> = ({
-    item,
-    index,
-  }: {
-    item: ICoffeInfo;
-    index: number;
-  }) => {
+  const renderItem: ListRenderItem<ICoffeInfo> = ({item, index}) => {
     if (coffeType === item?.type) {
       return (
         <>
@@ -99,7 +93,7 @@ const HomeScreen = () => {
   const getFavorites = async () => {
     setLoading(true);
     try {
-      const response = await FavoritesService.getFavorites();
+      const response = await FavoritesService.getFavorites(parseInt(user?.id));
       const justCoffeId = response.map((item: any) => {
         return item.coffeId.toString();
       });
@@ -110,10 +104,6 @@ const HomeScreen = () => {
     }
     setLoading(false);
   };
-
-  // useEffect(() => {
-
-  // }, []);
 
   useFocusEffect(
     useCallback(() => {

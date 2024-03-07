@@ -18,17 +18,10 @@ const Register = () => {
   const {goBack} = useNavigation();
   const {setToken, setUser} = useUserState();
   const [secureText, setSecureText] = useState<boolean>(true);
-  const [credentials, setCredentials] = useState<IUserCredentials>({
-    username: '',
-    password: '',
-  });
 
-  const register = async () => {
+  const register = async (form: IUserCredentials) => {
     try {
-      const response = await AuthService.createUser(
-        credentials.username,
-        credentials.password,
-      );
+      const response = await AuthService.createUser(form.username, form.password);
       console.log(response.data);
       setUser(response);
       setToken(response.acess_token);
@@ -61,7 +54,7 @@ const Register = () => {
           showEye={secureText}
         />
       </View>
-      <CoffeButton onPress={() => handleSubmit(register)} title="Cadastrar" width="40%" />
+      <CoffeButton onPress={handleSubmit(register)} title="Cadastrar" width="40%" />
     </Container>
   );
 };

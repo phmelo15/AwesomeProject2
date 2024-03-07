@@ -1,6 +1,6 @@
 import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import React, {useCallback, useEffect, useState} from 'react';
-import {FlatList, ListRenderItem, RefreshControl} from 'react-native';
+import {Button, FlatList, ListRenderItem, RefreshControl} from 'react-native';
 import CoffeCard from '../../components/CoffeCard/CoffeCard';
 import {ICoffeInfo} from '../../models/coffeModels';
 import {HomeRoutes} from '../../navigation/HomeStackScreen/HomeStackScreen.routes';
@@ -20,7 +20,7 @@ const Favourites = () => {
   const getFavourites = async () => {
     setLoading(true);
     try {
-      const response = await FavoritesService.getFavorites(user.id);
+      const response = await FavoritesService.getFavorites(parseInt(user.id));
       const responseCoffe = response.map((item: any) => {
         return item.coffeId;
       });
@@ -34,7 +34,7 @@ const Favourites = () => {
 
   const deleteFavorite = async (id: any) => {
     try {
-      const response = await FavoritesService.deleteFavorite(id);
+      const response = await FavoritesService.deleteFavorite(id, parseInt(user?.id));
     } catch (error) {
       console.error(error);
     }
@@ -43,9 +43,7 @@ const Favourites = () => {
   const getAllCafes = async favorites => {
     try {
       const response = await CoffeService.getAllCafes();
-      const filtered = response.filter((item: any) =>
-        favorites.includes(parseInt(item.id)),
-      );
+      const filtered = response.filter((item: any) => favorites.includes(item.id));
       setCoffeInfo(filtered);
     } catch (error) {
       console.error(error);

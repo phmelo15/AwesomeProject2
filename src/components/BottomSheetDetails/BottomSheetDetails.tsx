@@ -1,16 +1,29 @@
-import {View, Text, Animated, Dimensions, PanResponder, Button} from 'react-native';
+import {
+  View,
+  Text,
+  Animated,
+  Dimensions,
+  PanResponder,
+  Button,
+  Alert,
+} from 'react-native';
 import React, {useRef} from 'react';
 import styles, {ButtonContainer, Description, DragHandle, TitleAbout} from './styles';
 import BottomSheetCard from '../BottomSheetCard/BottomSheetCard';
 import CoffeButton from '../CoffeButton/CoffeButton';
 import CoffeSize from '../CoffeSize/CoffeSize';
 import {ICoffeInfo} from '../../models/coffeModels';
+import CartService from '../../services/CartService/CartService';
+import {useNavigation} from '@react-navigation/native';
+import {StackTypes} from '../../navigation/StackNavigation/routes.types';
+import {HomeRoutes} from '../../navigation/HomeStackScreen/HomeStackScreen.routes';
 
 interface ICoffeDetails {
   data: ICoffeInfo;
 }
 
 const BottomSheetDetails = ({data}: ICoffeDetails) => {
+  const {navigate} = useNavigation<StackTypes>();
   const springAnimation = (direction: 'up' | 'down') => {
     lastGestureDy.current =
       direction === 'down' ? maxDownwardTranslateY : maxUpwardTranslateY;
@@ -67,6 +80,20 @@ const BottomSheetDetails = ({data}: ICoffeDetails) => {
     ],
   };
 
+  const createCart = async (id: number) => {
+    try {
+      const response = await CartService.createCart(id);
+      Alert.alert('CoffeShop', 'Café adicionado ao carrinho ☕', [
+        {
+          text: 'Ok',
+          onPress: () => navigate(HomeRoutes.HOMESCREEN),
+        },
+      ]);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <Animated.View
       style={[styles.container, bottomSheetAnimation]}
@@ -80,7 +107,7 @@ const BottomSheetDetails = ({data}: ICoffeDetails) => {
         title="Add to cart"
         width="100%"
         price={data?.price}
-        onPress={() => console.log('algoooo')}
+        onPress={() => createCart(data?.id)}
       />
     </Animated.View>
   );
